@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import Comment from './Comment';
+import Comment from "./Comment";
 
 export default {
-    component: Comment,
-    title: 'Comment',
-}
+  component: Comment,
+  title: "Comment",
+};
 
-const Template =  args => <Comment {...args} />;
+const Template = (args) => <Comment {...args} />;
 
-export const Default =  Template.bind({});
+export const Default = Template.bind({});
