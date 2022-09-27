@@ -1,12 +1,12 @@
 import React from 'react';
+import AddComment from './AddComment';
 import CommentList from './CommentList';
-import ReplyList from './ReplyList';
 
-export default function CommentsSection () {
+export default function CommentsSection ({comments}) {
     return (
         <>
-        <CommentList />
-        <ReplyList />
+        <CommentList comments={comments} />
+        <AddComment />
         </>
     )
 }
