@@ -8,6 +8,7 @@ export default function ReplyList ({replies}) {
         {replies.map((reply) =>
           reply.map((rep) => (
             <Reply
+              key={rep.id}
               text={rep.content}
               userImage={rep.user.image.png}
               userName={rep.user.username}

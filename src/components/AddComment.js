@@ -2,6 +2,8 @@ import React from "react";
 
 import styled from 'styled-components';
 
+import { useState } from 'react';
+
 const AddCommentContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -11,6 +13,11 @@ const AddCommentContainer = styled.div`
   background-color: var(--color-white);
   padding: 1rem;
   margin-top: 1rem;
+  margin-bottom: 1rem;
+`;
+
+const UserLogo = styled.img`
+  width: 2rem;
 `;
 
 const TextArea = styled.textarea`
@@ -38,15 +45,19 @@ const SendCommentButton = styled.button`
   cursor: pointer;
 `;
 
-export default function AddComment() {
+export default function AddComment({setNewComment, setSend}) {
+
   return (
     <>
       <AddCommentContainer>
-          <img src="" />
-          <TextArea
-            placeholder="Add a comment..."
-          ></TextArea>
-          <SendCommentButton>Send</SendCommentButton>
+        <UserLogo src="/images/avatars/image-juliusomo.png" />
+        <TextArea
+          placeholder="Add a comment..."
+          onChange={(e) => setNewComment(e.target.value)}
+        ></TextArea>
+        <SendCommentButton onClick={() => setSend(true)}>
+          Send
+        </SendCommentButton>
       </AddCommentContainer>
     </>
   );
