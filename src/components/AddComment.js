@@ -2,8 +2,6 @@ import React from "react";
 
 import styled from 'styled-components';
 
-import { useState } from 'react';
-
 const AddCommentContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -45,8 +43,8 @@ const SendCommentButton = styled.button`
   cursor: pointer;
 `;
 
-export default function AddComment({setNewComment, setSend}) {
-
+export default function AddComment({setNewComment, setSend, setAdd, add}) {
+  
   return (
     <>
       <AddCommentContainer>
@@ -55,7 +53,7 @@ export default function AddComment({setNewComment, setSend}) {
           placeholder="Add a comment..."
           onChange={(e) => setNewComment(e.target.value)}
         ></TextArea>
-        <SendCommentButton onClick={() => setSend(true)}>
+        <SendCommentButton onClick={() => { setSend(true); setAdd(!add);}}>
           Send
         </SendCommentButton>
       </AddCommentContainer>

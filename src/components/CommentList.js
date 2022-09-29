@@ -4,6 +4,7 @@ import Comment from "./Comment";
 import Reply from "./Reply";
 
 export default function CommentList({ comments }) {
+
   return (
     <>
       {comments.map((comment) => (

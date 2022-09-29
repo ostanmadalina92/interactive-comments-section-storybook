@@ -6,6 +6,11 @@ import { useState } from 'react';
 
 import AddComment from './AddComment';
 
+const CommentsSection =  styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const CommentDiv = styled.div`
   display: flex;
   flex-direction: row;
@@ -13,6 +18,7 @@ const CommentDiv = styled.div`
   margin-bottom: 1rem;
   gap: 1rem;
   background-color: var(--color-white);
+  width: 100%;
 `;
 
 const Incrementor = styled.div`
@@ -99,6 +105,22 @@ const CommentText = styled.p`
   font-weight: 500;
 `;
 
+const ReplyDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const LineBreakDiv = styled.div`
+  width: 10%;
+  display: flex;
+  justify-content: center;
+`;
+const LineBreak = styled.hr`
+  background-color: var(--color-light-gray);
+  width: 2px;
+  border: none;
+`;
+
 export default function Comment({ text, userImage, userName, createdAt }) {
   
   const [add, setAdd] =  useState(false);
@@ -106,7 +128,7 @@ export default function Comment({ text, userImage, userName, createdAt }) {
   const [send, setSend] =  useState(false);
 
   return (
-    <>
+    <CommentsSection>
       <CommentDiv>
         <Incrementor>
           <IncrementorButton>+</IncrementorButton>
@@ -129,29 +151,41 @@ export default function Comment({ text, userImage, userName, createdAt }) {
         </CommentData>
       </CommentDiv>
       {newComment !== "" && send === true && (
-        <CommentDiv>
-          <Incrementor>
-            <IncrementorButton>+</IncrementorButton>
-            <IncrementorValue>12</IncrementorValue>
-            <IncrementorButton>-</IncrementorButton>
-          </Incrementor>
-          <CommentData>
-            <UserData>
-              <User>
-                <UserImage src={""} />
-                <UserName></UserName>
-                <CreatedAt></CreatedAt>
-              </User>
-              <Reply>
-                <ReplyImage src="/images/icon-reply.svg" />
-                <ReplyButton>Reply</ReplyButton>
-              </Reply>
-            </UserData>
-            <CommentText>{text}</CommentText>
-          </CommentData>
-        </CommentDiv>
+        <ReplyDiv>
+          <LineBreakDiv>
+            <LineBreak />
+          </LineBreakDiv>
+          <CommentDiv>
+            <Incrementor>
+              <IncrementorButton>+</IncrementorButton>
+              <IncrementorValue>12</IncrementorValue>
+              <IncrementorButton>-</IncrementorButton>
+            </Incrementor>
+            <CommentData>
+              <UserData>
+                <User>
+                  <UserImage src="/images/avatars/image-juliusomo.png" />
+                  <UserName>juliusomo</UserName>
+                  <CreatedAt>now</CreatedAt>
+                </User>
+                <Reply>
+                  <ReplyImage src="/images/icon-reply.svg" />
+                  <ReplyButton onClick={() => setAdd(true)}>Reply</ReplyButton>
+                </Reply>
+              </UserData>
+              <CommentText>{newComment}</CommentText>
+            </CommentData>
+          </CommentDiv>
+        </ReplyDiv>
       )}
-      {add === true && <AddComment setNewComment={setNewComment} setSend={setSend}/>}
-    </>
+      {add === true && (
+        <AddComment
+          setNewComment={setNewComment}
+          setSend={setSend}
+          setAdd={setAdd}
+          add={add}
+        />
+      )}
+    </CommentsSection>
   );
 }
