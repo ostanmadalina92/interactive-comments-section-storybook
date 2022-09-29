@@ -4,6 +4,8 @@ import Comment from "./Comment";
 
 import styled from 'styled-components';
 
+import {useState} from 'react';
+
 const AddCommentContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -45,8 +47,10 @@ const SendCommentButton = styled.button`
   cursor: pointer;
 `;
 
-export default function AddComment({ newComment, setNewComment, addMainComment,setAddMainComment, setSend, setAdd, add}) {
+export default function AddComment({ newComment, setNewComment, setSend, setAdd, add}) {
   
+  const [addMainComment, setAddMainComment] = useState(false);
+
   return (
     <>
       {addMainComment === true && (
