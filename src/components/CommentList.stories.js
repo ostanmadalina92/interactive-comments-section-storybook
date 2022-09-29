@@ -13,5 +13,5 @@ const Template = args => <CommentList {...args} />
 
 export const Comments = Template.bind({});
 Comments.args = {
-    comments: data.comments,
-}
+  comments: data.comments,
+};

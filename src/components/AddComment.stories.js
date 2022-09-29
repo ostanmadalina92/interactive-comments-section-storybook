@@ -10,3 +10,4 @@ export default {
 const Template = (args) => <AddComment {...args} />;
 
 export const Default = Template.bind({});
+

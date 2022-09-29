@@ -1,5 +1,7 @@
 import React from "react";
 
+import Comment from "./Comment";
+
 import styled from 'styled-components';
 
 const AddCommentContainer = styled.div`
@@ -43,17 +45,31 @@ const SendCommentButton = styled.button`
   cursor: pointer;
 `;
 
-export default function AddComment({setNewComment, setSend, setAdd, add}) {
+export default function AddComment({ newComment, setNewComment, addMainComment,setAddMainComment, setSend, setAdd, add}) {
   
   return (
     <>
+      {addMainComment === true && (
+        <Comment
+          text={newComment}
+          userImage="/images/avatars/image-juliusomo.png"
+          userName="juliusomo"
+          createdAt="now"
+        />
+      )}
       <AddCommentContainer>
         <UserLogo src="/images/avatars/image-juliusomo.png" />
         <TextArea
           placeholder="Add a comment..."
           onChange={(e) => setNewComment(e.target.value)}
         ></TextArea>
-        <SendCommentButton onClick={() => { setSend(true); setAdd(!add);}}>
+        <SendCommentButton
+          onClick={() => {
+            setAddMainComment(true);
+            setSend(true);
+            setAdd(!add);
+          }}
+        >
           Send
         </SendCommentButton>
       </AddCommentContainer>

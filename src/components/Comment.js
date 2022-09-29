@@ -125,6 +125,7 @@ export default function Comment({ text, userImage, userName, createdAt }) {
   
   const [add, setAdd] =  useState(false);
   const [newComment, setNewComment] = useState("");
+  const [addMainComment, setAddMainComment] = useState(false)
   const [send, setSend] =  useState(false);
 
   return (
@@ -180,7 +181,10 @@ export default function Comment({ text, userImage, userName, createdAt }) {
       )}
       {add === true && (
         <AddComment
+          newComment = {newComment}
           setNewComment={setNewComment}
+          addMainComment={addMainComment}
+          setAddMainComment={setAddMainComment}
           setSend={setSend}
           setAdd={setAdd}
           add={add}
