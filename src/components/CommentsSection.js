@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import AddComment from "./AddComment";
 import CommentList from "./CommentList";
@@ -10,11 +10,22 @@ const Container = styled.div`
 `;
 
 export default function CommentsSection({ comments }) {
+
+    const [add, setAdd] = useState(false);
+    const [newComment, setNewComment] = useState("");
+    const [send, setSend] = useState(false);
+
   return (
     <>
       <Container>
         <CommentList comments={comments} />
-        <AddComment />
+        <AddComment
+          newComment={newComment}
+          setNewComment={setNewComment}
+          setSend={setSend}
+          setAdd={setAdd}
+          add={add}
+        />
       </Container>
     </>
   );

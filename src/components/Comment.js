@@ -2,11 +2,11 @@ import React from "react";
 
 import styled from "styled-components";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-import AddComment from './AddComment';
+import AddComment from "./AddComment";
 
-const CommentsSection =  styled.div`
+const CommentsSection = styled.div`
   display: flex;
   flex-direction: column;
 `;
@@ -88,8 +88,7 @@ const Reply = styled.div`
   cursor: pointer;
 `;
 
-const ReplyImage = styled.img`
-`;
+const ReplyImage = styled.img``;
 
 const ReplyButton = styled.button`
   padding: 0;
@@ -121,11 +120,48 @@ const LineBreak = styled.hr`
   border: none;
 `;
 
+const You = styled.p`
+  background: var(--color-moderate-blue);
+  color: var(--color-white);
+  padding: 0 0.3rem;
+`;
+
+const Delete = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: centre;
+`;
+const DeleteButton = styled.button`
+  color: var(--color-soft-red);
+  border: none;
+  background: none;
+  font-weight: 700;
+`;
+
+const DeleteImage = styled.img`
+  padding-right: 0.5rem;
+`;
+
+const Edit = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: centre;
+`;
+const EditButton = styled.button`
+  color: var(--color-moderate-blue);
+  border: none;
+  background: none;
+  font-weight: 700;
+`;
+
+const EditImage = styled.img`
+  padding-right: 0.5rem;
+`;
+
 export default function Comment({ text, userImage, userName, createdAt }) {
-  
-  const [add, setAdd] =  useState(false);
+  const [add, setAdd] = useState(false);
   const [newComment, setNewComment] = useState("");
-  const [send, setSend] =  useState(false);
+  const [send, setSend] = useState(false);
 
   return (
     <CommentsSection>
@@ -166,11 +202,18 @@ export default function Comment({ text, userImage, userName, createdAt }) {
                 <User>
                   <UserImage src="/images/avatars/image-juliusomo.png" />
                   <UserName>juliusomo</UserName>
+                  <You>you</You>
                   <CreatedAt>now</CreatedAt>
                 </User>
                 <Reply>
-                  <ReplyImage src="/images/icon-reply.svg" />
-                  <ReplyButton onClick={() => setAdd(true)}>Reply</ReplyButton>
+                  <Delete>
+                    <DeleteImage src="/images/icon-delete.svg"></DeleteImage>
+                    <DeleteButton>Delete</DeleteButton>
+                  </Delete>
+                  <Edit>
+                    <EditImage src="/images/icon-edit.svg"></EditImage>
+                    <EditButton>Edit</EditButton>
+                  </Edit>
                 </Reply>
               </UserData>
               <CommentText>{newComment}</CommentText>
@@ -180,7 +223,7 @@ export default function Comment({ text, userImage, userName, createdAt }) {
       )}
       {add === true && (
         <AddComment
-          newComment = {newComment}
+          newComment={newComment}
           setNewComment={setNewComment}
           setSend={setSend}
           setAdd={setAdd}
