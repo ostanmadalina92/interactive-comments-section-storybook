@@ -160,7 +160,6 @@ const EditImage = styled.img`
 
 export default function Comment({ text, userImage, userName, createdAt }) {
   const [add, setAdd] = useState(false);
-  const [newComment, setNewComment] = useState("");
   const [send, setSend] = useState(false);
 
   return (
@@ -186,45 +185,8 @@ export default function Comment({ text, userImage, userName, createdAt }) {
           <CommentText>{text}</CommentText>
         </CommentData>
       </CommentDiv>
-      {newComment !== "" && send === true && (
-        <ReplyDiv>
-          <LineBreakDiv>
-            <LineBreak />
-          </LineBreakDiv>
-          <CommentDiv>
-            <Incrementor>
-              <IncrementorButton>+</IncrementorButton>
-              <IncrementorValue>12</IncrementorValue>
-              <IncrementorButton>-</IncrementorButton>
-            </Incrementor>
-            <CommentData>
-              <UserData>
-                <User>
-                  <UserImage src="/images/avatars/image-juliusomo.png" />
-                  <UserName>juliusomo</UserName>
-                  <You>you</You>
-                  <CreatedAt>now</CreatedAt>
-                </User>
-                <Reply>
-                  <Delete>
-                    <DeleteImage src="/images/icon-delete.svg"></DeleteImage>
-                    <DeleteButton>Delete</DeleteButton>
-                  </Delete>
-                  <Edit>
-                    <EditImage src="/images/icon-edit.svg"></EditImage>
-                    <EditButton>Edit</EditButton>
-                  </Edit>
-                </Reply>
-              </UserData>
-              <CommentText>{newComment}</CommentText>
-            </CommentData>
-          </CommentDiv>
-        </ReplyDiv>
-      )}
-      {add === true && (
+      {add && (
         <AddComment
-          newComment={newComment}
-          setNewComment={setNewComment}
           setSend={setSend}
           setAdd={setAdd}
           add={add}
@@ -233,3 +195,68 @@ export default function Comment({ text, userImage, userName, createdAt }) {
     </CommentsSection>
   );
 }
+
+
+
+
+
+      // {
+      //   newComment !== "" && send === true && (
+      //     <ReplyDiv>
+      //       <LineBreakDiv>
+      //         <LineBreak />
+      //       </LineBreakDiv>
+      //       <CommentDiv>
+      //         <Incrementor>
+      //           <IncrementorButton>+</IncrementorButton>
+      //           <IncrementorValue>12</IncrementorValue>
+      //           <IncrementorButton>-</IncrementorButton>
+      //         </Incrementor>
+      //         <CommentData>
+      //           <UserData>
+      //             <User>
+      //               <UserImage src="/images/avatars/image-juliusomo.png" />
+      //               <UserName>juliusomo</UserName>
+      //               <You>you</You>
+      //               <CreatedAt>now</CreatedAt>
+      //             </User>
+      //             <Reply>
+      //               <Delete>
+      //                 <DeleteImage src="/images/icon-delete.svg"></DeleteImage>
+      //                 <DeleteButton>Delete</DeleteButton>
+      //               </Delete>
+      //               <Edit>
+      //                 <EditImage src="/images/icon-edit.svg"></EditImage>
+      //                 <EditButton>Edit</EditButton>
+      //               </Edit>
+      //             </Reply>
+      //           </UserData>
+      //           <CommentText>{newComment}</CommentText>
+      //         </CommentData>
+      //       </CommentDiv>
+      //     </ReplyDiv>
+      //   );
+      // }
+
+
+
+      //  const [replyList, setReplyList] = useState(data.comments[0].replies);
+
+      //  const addReply = (reply) => {
+      //    const newReplyList = replyList.slice();
+      //    newReplyList.push({
+      //      id: 1,
+      //      content: reply,
+      //      createdAt: Date.now(),
+      //      score: 12,
+      //      user: {
+      //        image: {
+      //          png: "/images/avatars/image-juliusomo.png",
+      //          webp: "/images/avatars/image-juliusomo.webp",
+      //        },
+      //        username: "juliusomo",
+      //      },
+      //      replies: [],
+      //    });
+      //    setReplyList(newReplyList);
+      //  };
