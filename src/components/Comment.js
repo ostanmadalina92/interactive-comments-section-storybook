@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { useState } from "react";
 
 import AddComment from "./AddComment";
+import DeleteModal from "./DeleteModal";
 
 const CommentsSection = styled.div`
   display: flex;
@@ -161,6 +162,7 @@ const EditImage = styled.img`
 export default function Comment({ text, userImage, userName, createdAt }) {
   const [add, setAdd] = useState(false);
   const [send, setSend] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   return (
     <CommentsSection>
@@ -190,6 +192,11 @@ export default function Comment({ text, userImage, userName, createdAt }) {
           setSend={setSend}
           setAdd={setAdd}
           add={add}
+        />
+      )}
+
+      {deleting && (
+        <DeleteModal
         />
       )}
     </CommentsSection>
