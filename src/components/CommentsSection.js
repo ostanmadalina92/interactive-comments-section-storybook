@@ -11,7 +11,6 @@ const Container = styled.div`
 
 export default function CommentsSection({ comments, currentUser }) {
   const [add, setAdd] = useState(false);
-  // const [newComment, setNewComment] = useState("");
   const [send, setSend] = useState(false);
 
   const [commentList, setCommentList] = useState(comments);
@@ -21,7 +20,7 @@ export default function CommentsSection({ comments, currentUser }) {
     newCommentList.push({
       id: 5,
       content: comment,
-      createdAt: Date.now(),
+      createdAt: "now",
       score: 12,
       user: currentUser,
       replies: [],

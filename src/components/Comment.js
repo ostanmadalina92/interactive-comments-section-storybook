@@ -52,6 +52,7 @@ const CommentData = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+
 `;
 
 const UserData = styled.div`
@@ -182,6 +183,7 @@ const StyleReply = styled.div`
 
 export default function Comment(comment) {
   const {
+    score,
     text,
     userImage,
     userName,
@@ -203,7 +205,7 @@ export default function Comment(comment) {
     newReplyList.push({
       id: 5,
       content: comment,
-      createdAt: Date.now(),
+      createdAt: "now",
       score: 12,
       user: {
         image: {
@@ -235,7 +237,7 @@ export default function Comment(comment) {
       <CommentDiv>
         <Incrementor>
           <IncrementorButton>+</IncrementorButton>
-          <IncrementorValue>12</IncrementorValue>
+          <IncrementorValue>{score}</IncrementorValue>
           <IncrementorButton>-</IncrementorButton>
         </Incrementor>
         <CommentData>
@@ -298,6 +300,7 @@ export default function Comment(comment) {
           <StyleReply>
             <Reply
               key={rep.id}
+              score={rep.score}
               text={rep.content}
               userImage={rep.user.image.png}
               userName={rep.user.username}

@@ -10,6 +10,7 @@ export default function CommentList({ comments, currentUser, deleteComment }) {
         <>
           <Comment
             key={comment.id}
+            score={comment.score}
             text={comment.content}
             userImage={comment.user.image.png}
             userName={comment.user.username}
