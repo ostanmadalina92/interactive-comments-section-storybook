@@ -174,14 +174,14 @@ const TextArea = styled.textarea`
 `;
 
 export default function Comment(comment) {
-  const { text, userImage, userName, createdAt, replies, currentUserC, setDeleteModalState } =
+  const { text, userImage, userName, createdAt, replies, currentUserC, deleteComment } =
     comment;
 
   const [add, setAdd] = useState(false);
   const [send, setSend] = useState(false);
   const [replyList, setReplyList] = useState(replies || []);
   const [editing, setEditing] = useState(false);
-  const [edited, setEdited] = useState("");
+  const [edited, setEdited] = useState(text);
   const [deleting, setDeleting] = useState(false);
 
   const addComment = (comment) => {
@@ -204,11 +204,7 @@ export default function Comment(comment) {
   };
 
   const editComment = () => {
-    setEditing(true)
-  }
-
-  const deleteComment = () => {
-    setDeleting(true)
+    setEditing(!editing)
   }
 
   return (
@@ -231,7 +227,7 @@ export default function Comment(comment) {
               {currentUserC === userName && (
                 <Delete>
                   <DeleteImage src="/images/icon-delete.svg"></DeleteImage>
-                  <DeleteButton onClick={deleteComment}>Delete</DeleteButton>
+                  <DeleteButton onClick={() => setDeleting(true)}>Delete</DeleteButton>
                 </Delete>
               )}
               {currentUserC === userName ? (
@@ -250,10 +246,12 @@ export default function Comment(comment) {
           {editing ? (
             <TextArea
               placeholder="Add a comment..."
-              onChange={(e) => setEdited(e.target.value)}
-            />
+              onChange={(e) =>{
+                setEdited(e.target.value)
+              } }
+            /> 
           ) : (
-            <CommentText>{text}</CommentText>
+            <CommentText>{edited}</CommentText>
           )}
         </CommentData>
       </CommentDiv>
@@ -287,7 +285,8 @@ export default function Comment(comment) {
       {deleting && (
         <DeleteModal
           setDeleting={setDeleting}
-          deleteComment={deleteComment}
+          onDelete={deleteComment}
+          
         />
       )}
     </CommentsSection>
