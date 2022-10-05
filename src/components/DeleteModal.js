@@ -64,7 +64,7 @@ const DeleteBtn = styled.button`
   background: var(--color-soft-red);
 `;
 
-export default function DeleteModal({ setDeleting,onDelete }) {
+export default function DeleteModal({ setDeleting, onDelete, onDeleteR }) {
   const cancelDelete = () => {
     setDeleting(false);
   };
@@ -72,6 +72,9 @@ export default function DeleteModal({ setDeleting,onDelete }) {
   const onDeleteComment = () => {
     if (typeof onDelete === "function") {
       onDelete();
+    }
+    if (typeof onDeleteR === "function") {
+      onDeleteR();
     }
     setDeleting(false);
   };

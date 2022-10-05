@@ -174,8 +174,15 @@ const TextArea = styled.textarea`
 `;
 
 export default function Comment(comment) {
-  const { text, userImage, userName, createdAt, replies, currentUserC, deleteComment } =
-    comment;
+  const {
+    text,
+    userImage,
+    userName,
+    createdAt,
+    replies,
+    currentUserC,
+    deleteComment,
+  } = comment;
 
   const [add, setAdd] = useState(false);
   const [send, setSend] = useState(false);
@@ -184,10 +191,10 @@ export default function Comment(comment) {
   const [edited, setEdited] = useState(text);
   const [deleting, setDeleting] = useState(false);
 
-  const addComment = (comment) => {
+  const addReply = (comment) => {
     const newReplyList = replyList.slice();
     newReplyList.push({
-      id: 1,
+      id: 5,
       content: comment,
       createdAt: Date.now(),
       score: 12,
@@ -203,9 +210,17 @@ export default function Comment(comment) {
     setReplyList(newReplyList);
   };
 
+  const deleteReply = (reply) => {
+    const newReplyList = replyList.filter(
+      (eachReply) => eachReply.id !== reply.id
+    );
+    setReplyList(newReplyList);
+    console.log(replyList);
+  };
+
   const editComment = () => {
-    setEditing(!editing)
-  }
+    setEditing(!editing);
+  };
 
   return (
     <CommentsSection>
@@ -227,7 +242,9 @@ export default function Comment(comment) {
               {currentUserC === userName && (
                 <Delete>
                   <DeleteImage src="/images/icon-delete.svg"></DeleteImage>
-                  <DeleteButton onClick={() => setDeleting(true)}>Delete</DeleteButton>
+                  <DeleteButton onClick={() => setDeleting(true)}>
+                    Delete
+                  </DeleteButton>
                 </Delete>
               )}
               {currentUserC === userName ? (
@@ -246,10 +263,10 @@ export default function Comment(comment) {
           {editing ? (
             <TextArea
               placeholder="Add a comment..."
-              onChange={(e) =>{
-                setEdited(e.target.value)
-              } }
-            /> 
+              onChange={(e) => {
+                setEdited(e.target.value);
+              }}
+            />
           ) : (
             <CommentText>{edited}</CommentText>
           )}
@@ -261,7 +278,7 @@ export default function Comment(comment) {
           setSend={setSend}
           setAdd={setAdd}
           add={add}
-          onSend={addComment}
+          onSend={addReply}
         />
       )}
 
@@ -278,16 +295,15 @@ export default function Comment(comment) {
             createdAt={rep.createdAt}
             currentUser={currentUserC}
             reply={rep}
+            deleting={deleting}
+            setDeleting={setDeleting}
+            deleteReply={() => deleteReply(rep)}
           />
         </ReplyDiv>
       ))}
-
+ 
       {deleting && (
-        <DeleteModal
-          setDeleting={setDeleting}
-          onDelete={deleteComment}
-          
-        />
+        <DeleteModal setDeleting={setDeleting} onDelete={deleteComment}/>
       )}
     </CommentsSection>
   );

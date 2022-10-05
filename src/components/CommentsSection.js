@@ -19,7 +19,7 @@ export default function CommentsSection({ comments, currentUser }) {
   const addComment = (comment) => {
     const newCommentList = commentList.slice();
     newCommentList.push({
-      id: 1,
+      id: 5,
       content: comment,
       createdAt: Date.now(),
       score: 12,
