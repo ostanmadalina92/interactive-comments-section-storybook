@@ -199,6 +199,16 @@ export default function Comment(comment) {
   const [editing, setEditing] = useState(false);
   const [edited, setEdited] = useState(text);
   const [deleting, setDeleting] = useState(false);
+  const [newScore, setNewScore] = useState(score);
+
+  const increase = () => {
+    let n = newScore + 1;
+    setNewScore(n);
+  }
+  const decrease = () => {
+    let m = newScore - 1;
+    setNewScore(m);
+  }
 
   const addReply = (comment) => {
     const newReplyList = replyList.slice();
@@ -236,9 +246,9 @@ export default function Comment(comment) {
     <CommentsSection>
       <CommentDiv>
         <Incrementor>
-          <IncrementorButton>+</IncrementorButton>
-          <IncrementorValue>{score}</IncrementorValue>
-          <IncrementorButton>-</IncrementorButton>
+          <IncrementorButton onClick={increase}>+</IncrementorButton>
+          <IncrementorValue>{newScore}</IncrementorValue>
+          <IncrementorButton onClick={decrease}>-</IncrementorButton>
         </Incrementor>
         <CommentData>
           <UserData>
