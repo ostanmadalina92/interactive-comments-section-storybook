@@ -14,4 +14,6 @@ const Template = (args) => <CommentsSections {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   comments: data.comments,
+  currentUser: data.currentUser,
 };
+

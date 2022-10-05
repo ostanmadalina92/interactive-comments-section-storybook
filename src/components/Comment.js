@@ -6,7 +6,7 @@ import { useState } from "react";
 
 import AddComment from "./AddComment";
 import DeleteModal from "./DeleteModal";
-import ReplyComment from "./Reply";
+import Reply from "./Reply";
 
 const CommentsSection = styled.div`
   display: flex;
@@ -81,7 +81,7 @@ const CreatedAt = styled.p`
   font-weight: 500;
 `;
 
-const Reply = styled.div`
+const ReplyComment = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -160,7 +160,10 @@ const EditImage = styled.img`
   padding-right: 0.5rem;
 `;
 
-export default function Comment({ text, userImage, userName, createdAt, replies }) {
+export default function Comment(comment) {
+
+  const {text, userImage, userName, createdAt, replies, currentUserC} = comment;
+
   const [add, setAdd] = useState(false);
   const [send, setSend] = useState(false);
   const [deleting, setDeleting] = useState(false);
@@ -197,12 +200,13 @@ export default function Comment({ text, userImage, userName, createdAt, replies 
             <User>
               <UserImage src={userImage} />
               <UserName>{userName}</UserName>
+              {currentUserC === userName && <You>you</You>}
               <CreatedAt>{createdAt}</CreatedAt>
             </User>
-            <Reply>
+            <ReplyComment>
               <ReplyImage src="/images/icon-reply.svg" />
               <ReplyButton onClick={() => setAdd(true)}>Reply</ReplyButton>
-            </Reply>
+            </ReplyComment>
           </UserData>
           <CommentText>{text}</CommentText>
         </CommentData>
@@ -218,12 +222,14 @@ export default function Comment({ text, userImage, userName, createdAt, replies 
       )}
 
       {replyList.map((rep) => (
-        <ReplyComment
+        <Reply
           key={rep.id}
           text={rep.content}
           userImage={rep.user.image.png}
           userName={rep.user.username}
           createdAt={rep.createdAt}
+          currentUser={currentUserC}
+          reply={rep}
         />
       ))}
 

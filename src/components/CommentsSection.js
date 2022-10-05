@@ -9,7 +9,7 @@ const Container = styled.div`
   width: 80%;
 `;
 
-export default function CommentsSection({ comments }) {
+export default function CommentsSection({ comments, currentUser }) {
 
     const [add, setAdd] = useState(false);
     // const [newComment, setNewComment] = useState("");
@@ -40,7 +40,7 @@ export default function CommentsSection({ comments }) {
   return (
     <>
       <Container>
-        <CommentList comments={commentList} />
+        <CommentList comments={commentList} currentUser={currentUser}/>
         <AddComment
           setSend={setSend}
           setAdd={setAdd}

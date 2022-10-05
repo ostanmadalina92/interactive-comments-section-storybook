@@ -20,7 +20,8 @@ const LineBreak = styled.hr`
   border: none;
 `;
 
-export default function Reply({ text, userImage, userName, createdAt }) {
+export default function Reply(reply) {
+ const { text, userImage, userName, createdAt, currentUser } = reply;
   return (
     <ReplyDiv>
       <LineBreakDiv>
@@ -31,6 +32,7 @@ export default function Reply({ text, userImage, userName, createdAt }) {
         userImage={userImage}
         userName={userName}
         createdAt={createdAt}
+        currentUserC={currentUser}
       />
     </ReplyDiv>
   );

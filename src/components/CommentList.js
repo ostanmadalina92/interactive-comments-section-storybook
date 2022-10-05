@@ -2,7 +2,7 @@ import React from "react";
 
 import Comment from "./Comment";
 
-export default function CommentList({ comments }) {
+export default function CommentList({ comments, currentUser }) {
 
   return (
     <>
@@ -15,6 +15,8 @@ export default function CommentList({ comments }) {
             userName={comment.user.username}
             createdAt={comment.createdAt}
             replies={comment.replies}
+            comment = {comment}
+            currentUserC = {currentUser.username}
           />
         </>
       ))}
