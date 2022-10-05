@@ -160,33 +160,57 @@ const EditImage = styled.img`
   padding-right: 0.5rem;
 `;
 
-export default function Comment(comment) {
+const TextArea = styled.textarea`
+  resize: none;
+  width: 80%;
+  height: 80px;
+  border-radius: 0.4rem;
+  border-color: var(--color-light-gray);
+  padding: 10px 20px;
+  font-family: "Rubik";
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-grayish-blue);
+`;
 
-  const {text, userImage, userName, createdAt, replies, currentUserC} = comment;
+export default function Comment(comment) {
+  const { text, userImage, userName, createdAt, replies, currentUserC, setDeleteModalState } =
+    comment;
 
   const [add, setAdd] = useState(false);
   const [send, setSend] = useState(false);
-  const [deleting, setDeleting] = useState(false);
   const [replyList, setReplyList] = useState(replies || []);
+  const [editing, setEditing] = useState(false);
+  const [edited, setEdited] = useState("");
+  const [deleting, setDeleting] = useState(false);
 
-      const addComment = (comment) => {
-      const newReplyList = replyList.slice();
-      newReplyList.push({
-        id: 1,
-        content: comment,
-        createdAt: Date.now(),
-        score: 12,
-        user: {
-          image: {
-            png: "/images/avatars/image-juliusomo.png",
-            webp: "/images/avatars/image-juliusomo.webp",
-          },
-          username: "juliusomo",
+  const addComment = (comment) => {
+    const newReplyList = replyList.slice();
+    newReplyList.push({
+      id: 1,
+      content: comment,
+      createdAt: Date.now(),
+      score: 12,
+      user: {
+        image: {
+          png: "/images/avatars/image-juliusomo.png",
+          webp: "/images/avatars/image-juliusomo.webp",
         },
-        replies: [],
-      });
-      setReplyList(newReplyList);
-    };
+        username: "juliusomo",
+      },
+      replies: [],
+    });
+    setReplyList(newReplyList);
+  };
+
+  const editComment = () => {
+    setEditing(true)
+  }
+
+  const deleteComment = () => {
+    setDeleting(true)
+  }
+
   return (
     <CommentsSection>
       <CommentDiv>
@@ -204,11 +228,33 @@ export default function Comment(comment) {
               <CreatedAt>{createdAt}</CreatedAt>
             </User>
             <ReplyComment>
-              <ReplyImage src="/images/icon-reply.svg" />
-              <ReplyButton onClick={() => setAdd(true)}>Reply</ReplyButton>
+              {currentUserC === userName && (
+                <Delete>
+                  <DeleteImage src="/images/icon-delete.svg"></DeleteImage>
+                  <DeleteButton onClick={deleteComment}>Delete</DeleteButton>
+                </Delete>
+              )}
+              {currentUserC === userName ? (
+                <Edit>
+                  <EditImage src="/images/icon-edit.svg"></EditImage>
+                  <EditButton onClick={editComment}>Edit</EditButton>
+                </Edit>
+              ) : (
+                <>
+                  <ReplyImage src="/images/icon-reply.svg" />
+                  <ReplyButton onClick={() => setAdd(true)}>Reply</ReplyButton>
+                </>
+              )}
             </ReplyComment>
           </UserData>
-          <CommentText>{text}</CommentText>
+          {editing ? (
+            <TextArea
+              placeholder="Add a comment..."
+              onChange={(e) => setEdited(e.target.value)}
+            />
+          ) : (
+            <CommentText>{text}</CommentText>
+          )}
         </CommentData>
       </CommentDiv>
 
@@ -222,83 +268,28 @@ export default function Comment(comment) {
       )}
 
       {replyList.map((rep) => (
-        <Reply
-          key={rep.id}
-          text={rep.content}
-          userImage={rep.user.image.png}
-          userName={rep.user.username}
-          createdAt={rep.createdAt}
-          currentUser={currentUserC}
-          reply={rep}
-        />
+        <ReplyDiv>
+          <LineBreakDiv>
+            <LineBreak />
+          </LineBreakDiv>
+          <Reply
+            key={rep.id}
+            text={rep.content}
+            userImage={rep.user.image.png}
+            userName={rep.user.username}
+            createdAt={rep.createdAt}
+            currentUser={currentUserC}
+            reply={rep}
+          />
+        </ReplyDiv>
       ))}
 
-      {deleting && <DeleteModal />}
+      {deleting && (
+        <DeleteModal
+          setDeleting={setDeleting}
+          deleteComment={deleteComment}
+        />
+      )}
     </CommentsSection>
   );
 }
-
-
-
-
-
-      // {
-      //   newComment !== "" && send === true && (
-      //     <ReplyDiv>
-      //       <LineBreakDiv>
-      //         <LineBreak />
-      //       </LineBreakDiv>
-      //       <CommentDiv>
-      //         <Incrementor>
-      //           <IncrementorButton>+</IncrementorButton>
-      //           <IncrementorValue>12</IncrementorValue>
-      //           <IncrementorButton>-</IncrementorButton>
-      //         </Incrementor>
-      //         <CommentData>
-      //           <UserData>
-      //             <User>
-      //               <UserImage src="/images/avatars/image-juliusomo.png" />
-      //               <UserName>juliusomo</UserName>
-      //               <You>you</You>
-      //               <CreatedAt>now</CreatedAt>
-      //             </User>
-      //             <Reply>
-      //               <Delete>
-      //                 <DeleteImage src="/images/icon-delete.svg"></DeleteImage>
-      //                 <DeleteButton>Delete</DeleteButton>
-      //               </Delete>
-      //               <Edit>
-      //                 <EditImage src="/images/icon-edit.svg"></EditImage>
-      //                 <EditButton>Edit</EditButton>
-      //               </Edit>
-      //             </Reply>
-      //           </UserData>
-      //           <CommentText>{newComment}</CommentText>
-      //         </CommentData>
-      //       </CommentDiv>
-      //     </ReplyDiv>
-      //   );
-      // }
-
-
-
-      //  const [replyList, setReplyList] = useState(data.comments[0].replies);
-
-      //  const addReply = (reply) => {
-      //    const newReplyList = replyList.slice();
-      //    newReplyList.push({
-      //      id: 1,
-      //      content: reply,
-      //      createdAt: Date.now(),
-      //      score: 12,
-      //      user: {
-      //        image: {
-      //          png: "/images/avatars/image-juliusomo.png",
-      //          webp: "/images/avatars/image-juliusomo.webp",
-      //        },
-      //        username: "juliusomo",
-      //      },
-      //      replies: [],
-      //    });
-      //    setReplyList(newReplyList);
-      //  };

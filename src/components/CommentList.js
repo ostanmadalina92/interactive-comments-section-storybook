@@ -15,8 +15,8 @@ export default function CommentList({ comments, currentUser }) {
             userName={comment.user.username}
             createdAt={comment.createdAt}
             replies={comment.replies}
-            comment = {comment}
-            currentUserC = {currentUser.username}
+            comment={comment}
+            currentUserC={currentUser.username}
           />
         </>
       ))}

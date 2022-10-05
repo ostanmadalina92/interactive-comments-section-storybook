@@ -1,20 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function DeleteModal({
-  setDeleting,
-  deleteComment,
-  setDeleteModalState,
-}) {
-  const cancelDelete = () => {
-    setDeleting(false);
-    setDeleteModalState(false);
-  };
-
-  const deleteBtnClick = () => {
-    deleteComment();
-    setDeleteModalState(false);
-  };
   const DeleteConfirmationWrapper = styled.div`
     position: fixed;
     z-index: 100;
@@ -37,7 +23,7 @@ export default function DeleteModal({
     padding: 20px;
     border-radius: 10px;
     width: 400px;
-    padding: 30px
+    padding: 30px;
   `;
   const Title = styled.div`
     color: var(--color-dark-blue);
@@ -77,6 +63,19 @@ export default function DeleteModal({
     cursor: pointer;
     background: var(--color-soft-red);
   `;
+
+export default function DeleteModal({
+  setDeleting,
+  deleteComment,
+}) {
+  const cancelDelete = () => {
+    setDeleting(false);
+  };
+
+  const deleteBtnClick = () => {
+    deleteComment();
+  };
+
   return (
     <DeleteConfirmationWrapper>
       <DeleteContainer>
