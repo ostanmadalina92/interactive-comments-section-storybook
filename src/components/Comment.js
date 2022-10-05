@@ -6,6 +6,7 @@ import { useState } from "react";
 
 import AddComment from "./AddComment";
 import DeleteModal from "./DeleteModal";
+import ReplyComment from "./Reply";
 
 const CommentsSection = styled.div`
   display: flex;
@@ -159,11 +160,30 @@ const EditImage = styled.img`
   padding-right: 0.5rem;
 `;
 
-export default function Comment({ text, userImage, userName, createdAt }) {
+export default function Comment({ text, userImage, userName, createdAt, replies }) {
   const [add, setAdd] = useState(false);
   const [send, setSend] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [replyList, setReplyList] = useState(replies || []);
 
+      const addComment = (comment) => {
+      const newReplyList = replyList.slice();
+      newReplyList.push({
+        id: 1,
+        content: comment,
+        createdAt: Date.now(),
+        score: 12,
+        user: {
+          image: {
+            png: "/images/avatars/image-juliusomo.png",
+            webp: "/images/avatars/image-juliusomo.webp",
+          },
+          username: "juliusomo",
+        },
+        replies: [],
+      });
+      setReplyList(newReplyList);
+    };
   return (
     <CommentsSection>
       <CommentDiv>
@@ -187,18 +207,27 @@ export default function Comment({ text, userImage, userName, createdAt }) {
           <CommentText>{text}</CommentText>
         </CommentData>
       </CommentDiv>
+
       {add && (
         <AddComment
           setSend={setSend}
           setAdd={setAdd}
           add={add}
+          onSend={addComment}
         />
       )}
 
-      {deleting && (
-        <DeleteModal
+      {replyList.map((rep) => (
+        <ReplyComment
+          key={rep.id}
+          text={rep.content}
+          userImage={rep.user.image.png}
+          userName={rep.user.username}
+          createdAt={rep.createdAt}
         />
-      )}
+      ))}
+
+      {deleting && <DeleteModal />}
     </CommentsSection>
   );
 }

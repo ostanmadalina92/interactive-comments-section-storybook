@@ -1,7 +1,6 @@
 import React from "react";
 
 import Comment from "./Comment";
-import Reply from "./Reply";
 
 export default function CommentList({ comments }) {
 
@@ -15,16 +14,8 @@ export default function CommentList({ comments }) {
             userImage={comment.user.image.png}
             userName={comment.user.username}
             createdAt={comment.createdAt}
+            replies={comment.replies}
           />
-          {comment.replies.map((rep) => (
-            <Reply
-              key={rep.id}
-              text={rep.content}
-              userImage={rep.user.image.png}
-              userName={rep.user.username}
-              createdAt={rep.createdAt}
-            />
-          ))}
         </>
       ))}
     </>
