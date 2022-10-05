@@ -33,6 +33,7 @@ const Incrementor = styled.div`
   width: 4rem;
   height: 4.5rem;
   padding: 0.5rem;
+  flex: 0 0 4rem;
 `;
 
 const IncrementorButton = styled.button`
@@ -50,6 +51,7 @@ const IncrementorValue = styled.p`
 const CommentData = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 const UserData = styled.div`
@@ -115,6 +117,7 @@ const LineBreakDiv = styled.div`
   width: 10%;
   display: flex;
   justify-content: center;
+  flex: 0 0 10%;
 `;
 const LineBreak = styled.hr`
   background-color: var(--color-light-gray);
@@ -171,6 +174,10 @@ const TextArea = styled.textarea`
   font-weight: 500;
   font-size: 16px;
   color: var(--color-grayish-blue);
+`;
+
+const StyleReply = styled.div`
+  flex-grow: 1;
 `;
 
 export default function Comment(comment) {
@@ -288,18 +295,20 @@ export default function Comment(comment) {
           <LineBreakDiv>
             <LineBreak />
           </LineBreakDiv>
-          <Reply
-            key={rep.id}
-            text={rep.content}
-            userImage={rep.user.image.png}
-            userName={rep.user.username}
-            createdAt={rep.createdAt}
-            currentUser={currentUserC}
-            reply={rep}
-            deleting={deleting}
-            setDeleting={setDeleting}
-            deleteReply={() => deleteReply(rep)}
-          />
+          <StyleReply>
+            <Reply
+              key={rep.id}
+              text={rep.content}
+              userImage={rep.user.image.png}
+              userName={rep.user.username}
+              createdAt={rep.createdAt}
+              currentUser={currentUserC}
+              reply={rep}
+              deleting={deleting}
+              setDeleting={setDeleting}
+              deleteReply={() => deleteReply(rep)}
+            />
+          </StyleReply>
         </ReplyDiv>
       ))}
 

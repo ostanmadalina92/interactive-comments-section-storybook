@@ -23,13 +23,7 @@ export default function CommentsSection({ comments, currentUser }) {
       content: comment,
       createdAt: Date.now(),
       score: 12,
-      user: {
-        image: {
-          png: "/images/avatars/image-juliusomo.png",
-          webp: "/images/avatars/image-juliusomo.webp",
-        },
-        username: "juliusomo",
-      },
+      user: currentUser,
       replies: [],
     });
     setCommentList(newCommentList);
