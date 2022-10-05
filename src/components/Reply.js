@@ -1,10 +1,9 @@
 import React from "react";
 
 import Comment from "./Comment";
-import DeleteModal from "./DeleteModal";
 
 export default function Reply(reply) {
- const { text, userImage, userName, createdAt, currentUser, deleteReply, deleting, setDeleting } = reply;
+ const { text, userImage, userName, createdAt, currentUser, deleteReply} = reply;
   return (
     <>
       <Comment
@@ -13,11 +12,8 @@ export default function Reply(reply) {
         userName={userName}
         createdAt={createdAt}
         currentUserC={currentUser}
-        deleteReply={deleteReply}
+        deleteComment={deleteReply}
       />
-        {deleting && (
-        <DeleteModal setDeleting={setDeleting} onDeleteR={deleteReply}/>
-      )}
     </>
   );
 }

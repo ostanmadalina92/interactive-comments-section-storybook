@@ -216,6 +216,7 @@ export default function Comment(comment) {
     );
     setReplyList(newReplyList);
     console.log(replyList);
+    console.log(reply);
   };
 
   const editComment = () => {
@@ -301,9 +302,9 @@ export default function Comment(comment) {
           />
         </ReplyDiv>
       ))}
- 
+
       {deleting && (
-        <DeleteModal setDeleting={setDeleting} onDelete={deleteComment}/>
+        <DeleteModal setDeleting={setDeleting} onDelete={deleteComment} />
       )}
     </CommentsSection>
   );

@@ -38,8 +38,6 @@ export default function CommentsSection({ comments, currentUser }) {
     const newCommentList = commentList.filter(
       (eachComment) => eachComment.id !== comment.id
     );
-    console.log(commentList);
-    console.log(comment);
     setCommentList(newCommentList);
   };
 
