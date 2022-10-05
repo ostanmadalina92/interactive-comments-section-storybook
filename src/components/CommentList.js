@@ -2,7 +2,11 @@ import React from "react";
 
 import Comment from "./Comment";
 
-export default function CommentList({ comments, currentUser, deleteComment }) {
+const data = require("../data.json");
+
+const comments = data.comments;
+
+export default function CommentList({ currentUser, deleteComment }) {
 
   return (
     <>

@@ -33,7 +33,7 @@ const Incrementor = styled.div`
   width: 4rem;
   height: 4.5rem;
   padding: 0.5rem;
-  flex: 0 0 4rem;
+  flex: 0 0 2rem;
 `;
 
 const IncrementorButton = styled.button`
