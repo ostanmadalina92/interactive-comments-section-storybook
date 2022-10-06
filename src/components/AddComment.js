@@ -43,6 +43,9 @@ const SendCommentButton = styled.button`
   text-transform: uppercase;
   font-weight: 700;
   cursor: pointer;
+  &:hover {
+    background: var(--color-light-grayish-blue);
+  }
 `;
 
 export default function AddComment({

@@ -41,7 +41,11 @@ const IncrementorButton = styled.button`
   background: none;
   color: var(--color-light-grayish-blue);
   cursor: pointer;
+  &:hover {
+    color: var(--color-moderate-blue);
+  }
 `;
+
 
 const IncrementorValue = styled.p`
   color: var(--color-moderate-blue);
@@ -92,7 +96,8 @@ const ReplyComment = styled.div`
   cursor: pointer;
 `;
 
-const ReplyImage = styled.img``;
+const ReplyImage = styled.img`
+`;
 
 const ReplyButton = styled.button`
   padding: 0;
@@ -100,6 +105,9 @@ const ReplyButton = styled.button`
   background: none;
   color: var(--color-moderate-blue);
   font-weight: 700;
+  &:hover {
+    color: var(--color-light-grayish-blue);
+  }
 `;
 
 const CommentText = styled.p`
@@ -141,6 +149,9 @@ const DeleteButton = styled.button`
   border: none;
   background: none;
   font-weight: 700;
+  &:hover {
+    color: var(--color-pale-red);
+  }
 `;
 
 const DeleteImage = styled.img`
@@ -157,6 +168,9 @@ const EditButton = styled.button`
   border: none;
   background: none;
   font-weight: 700;
+  &:hover {
+    color: var(--color-light-grayish-blue);
+  }
 `;
 
 const EditImage = styled.img`
@@ -186,9 +200,14 @@ const UpdateTextArea = styled.textarea`
 const UpdateButton = styled.button`
   background: var(--color-moderate-blue);
   color: var(--color-white);
-  padding: 0.5rem ;
+  padding: 0.5rem;
   height: 3rem;
   margin: 1rem 1.5rem;
+  border-radius: 0.3rem;
+  border: none;
+  &:hover {
+    background: var(--color-light-grayish-blue);
+  }
 `;
 
 const StyleReply = styled.div`
