@@ -52,7 +52,6 @@ const CommentData = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-
 `;
 
 const UserData = styled.div`
@@ -164,7 +163,14 @@ const EditImage = styled.img`
   padding-right: 0.5rem;
 `;
 
-const TextArea = styled.textarea`
+const Update = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin-top: 1rem;
+`;
+
+const UpdateTextArea = styled.textarea`
   resize: none;
   width: 80%;
   height: 80px;
@@ -175,6 +181,14 @@ const TextArea = styled.textarea`
   font-weight: 500;
   font-size: 16px;
   color: var(--color-grayish-blue);
+`;
+
+const UpdateButton = styled.button`
+  background: var(--color-moderate-blue);
+  color: var(--color-white);
+  padding: 0.5rem ;
+  height: 3rem;
+  margin: 1rem 1.5rem;
 `;
 
 const StyleReply = styled.div`
@@ -204,11 +218,11 @@ export default function Comment(comment) {
   const increase = () => {
     let n = newScore + 1;
     setNewScore(n);
-  }
+  };
   const decrease = () => {
     let m = newScore - 1;
     setNewScore(m);
-  }
+  };
 
   const addReply = (comment) => {
     const newReplyList = replyList.slice();
@@ -281,12 +295,15 @@ export default function Comment(comment) {
             </ReplyComment>
           </UserData>
           {editing ? (
-            <TextArea
-              placeholder="Add a comment..."
-              onChange={(e) => {
-                setEdited(e.target.value);
-              }}
-            />
+            <Update>
+              <UpdateTextArea
+                placeholder="Add a comment..."
+                onChange={(e) => {
+                  setEdited(e.target.value);
+                }}
+              />
+              <UpdateButton onClick={editComment}>Update</UpdateButton>
+            </Update>
           ) : (
             <CommentText>{edited}</CommentText>
           )}
