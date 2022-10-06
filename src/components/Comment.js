@@ -34,7 +34,11 @@ const Incrementor = styled.div`
   height: 4.5rem;
   padding: 0.5rem;
   flex: 0 0 2rem;
+  @media (max-width: 800px) {
+    display:none;
+  }
 `;
+
 
 const IncrementorButton = styled.button`
   border: none;
@@ -94,9 +98,26 @@ const ReplyComment = styled.div`
   justify-content: space-between;
   gap: 0.5rem;
   cursor: pointer;
+  @media (max-width: 800px) {
+    display: none;
+  }
+`;
+
+const Rep = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: centre;
+  @media (max-width: 800px) {
+    width: 3rem;
+    height: 1rem;
+    margin-right: 1rem;
+  }
 `;
 
 const ReplyImage = styled.img`
+  @media (max-width: 800px) {
+    margin-right: 0.5rem;
+  }
 `;
 
 const ReplyButton = styled.button`
@@ -143,6 +164,10 @@ const Delete = styled.div`
   display: flex;
   flex-direction: row;
   align-items: centre;
+  @media (max-width: 800px) {
+    width: 3rem;
+    height: 1rem;
+  }
 `;
 const DeleteButton = styled.button`
   color: var(--color-soft-red);
@@ -162,6 +187,10 @@ const Edit = styled.div`
   display: flex;
   flex-direction: row;
   align-items: centre;
+  @media (max-width: 800px) {
+    width: 3rem;
+    height: 1rem;
+  }
 `;
 const EditButton = styled.button`
   color: var(--color-moderate-blue);
@@ -212,6 +241,40 @@ const UpdateButton = styled.button`
 
 const StyleReply = styled.div`
   flex-grow: 1;
+`;
+
+const MobileDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  @media (min-width: 800px) {
+    display: none;
+  }
+`;
+
+const IncrementorMobile = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--color-very-light-gray);
+  border-radius: 0.3rem;
+  width: 8rem;
+  height: 2.5rem;
+  padding: 0.5rem;
+  flex: 0.2 0 0rem;
+  @media (min-width: 800px) {
+    display: none;
+  }
+`;
+
+const ReplyCommentMobile = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  @media (min-width: 800px) {
+    display: none;
+  }
 `;
 
 export default function Comment(comment) {
@@ -326,6 +389,35 @@ export default function Comment(comment) {
           ) : (
             <CommentText>{edited}</CommentText>
           )}
+
+          <MobileDiv>
+            <IncrementorMobile>
+              <IncrementorButton onClick={increase}>+</IncrementorButton>
+              <IncrementorValue>{newScore}</IncrementorValue>
+              <IncrementorButton onClick={decrease}>-</IncrementorButton>
+            </IncrementorMobile>
+            <ReplyCommentMobile>
+              {currentUserC === userName && (
+                <Delete>
+                  <DeleteImage src="/images/icon-delete.svg"></DeleteImage>
+                  <DeleteButton onClick={() => setDeleting(true)}>
+                    Delete
+                  </DeleteButton>
+                </Delete>
+              )}
+              {currentUserC === userName ? (
+                <Edit>
+                  <EditImage src="/images/icon-edit.svg"></EditImage>
+                  <EditButton onClick={editComment}>Edit</EditButton>
+                </Edit>
+              ) : (
+                <Rep>
+                  <ReplyImage src="/images/icon-reply.svg" />
+                  <ReplyButton onClick={() => setAdd(true)}>Reply</ReplyButton>
+                </Rep>
+              )}
+            </ReplyCommentMobile>
+          </MobileDiv>
         </CommentData>
       </CommentDiv>
 
